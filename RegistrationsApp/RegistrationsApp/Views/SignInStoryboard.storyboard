@@ -49,7 +49,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xob-x6-04u">
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error pass or email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xob-x6-04u">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemRedColor"/>
@@ -63,6 +63,9 @@
                                         <rect key="frame" x="0.0" y="321" width="343" height="34.333333333333314"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Sign In"/>
+                                        <connections>
+                                            <action selector="signInAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TMI-IA-CXl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -78,6 +81,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fgP-ck-4Cu"/>
+                    <connections>
+                        <outlet property="emailTF" destination="pca-Fi-yex" id="VMg-9r-Dol"/>
+                        <outlet property="errorLbl" destination="Xob-x6-04u" id="3mh-6b-N8c"/>
+                        <outlet property="passTF" destination="cEP-Wz-wnh" id="wUJ-kE-rVR"/>
+                        <segue destination="GZ3-AD-ZKq" kind="show" identifier="goToMainTBVC" id="hBW-M6-Dhx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,6 +101,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6H-i6-zku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1202" y="-168"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="cvh-65-VnL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="GZ3-AD-ZKq" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="d0p-37-XBF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dts-S6-bQx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1163" y="159"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TV2-fv-cRy">

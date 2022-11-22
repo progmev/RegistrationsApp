@@ -1,8 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5kD-c8-5fA">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Profile-->
+        <scene sceneID="dgc-g9-aFW">
+            <objects>
+                <viewController id="Gj6-EE-k73" customClass="ProfileVC" customModule="RegistrationsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ynk-4u-HDy">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eib-fq-FN9">
+                                <rect key="frame" x="258" y="109" width="85" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOutAction:" destination="Gj6-EE-k73" eventType="touchUpInside" id="GtT-TE-Sq6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNB-zg-ytf">
+                                <rect key="frame" x="126.66666666666669" y="634" width="140" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Delete account"/>
+                                <connections>
+                                    <action selector="deleteAccountAction" destination="Gj6-EE-k73" eventType="touchUpInside" id="D8u-w3-M3L"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SAG-jr-WQH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SAG-jr-WQH" firstAttribute="trailing" secondItem="eib-fq-FN9" secondAttribute="trailing" constant="50" id="0GA-8a-7S6"/>
+                            <constraint firstItem="gNB-zg-ytf" firstAttribute="centerX" secondItem="SAG-jr-WQH" secondAttribute="centerX" id="DrS-H2-f1X"/>
+                            <constraint firstItem="SAG-jr-WQH" firstAttribute="bottom" secondItem="gNB-zg-ytf" secondAttribute="bottom" constant="100" id="NmB-uk-2SB"/>
+                            <constraint firstItem="eib-fq-FN9" firstAttribute="top" secondItem="SAG-jr-WQH" secondAttribute="top" constant="50" id="Qaa-Z6-o5M"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="IMF-XX-j3J"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wzB-aa-aaU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="621" y="635"/>
+        </scene>
+        <!--App-->
+        <scene sceneID="H10-OL-VJZ">
+            <objects>
+                <viewController id="vPv-zO-iO0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ABa-UH-W7T">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="D27-8V-21L"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="App" image="person.fill.turn.right" catalog="system" id="Q3k-Nv-9Fr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6H7-kN-wM1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="622" y="-90"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="f9d-1p-VPE">
+            <objects>
+                <tabBarController id="5kD-c8-5fA" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Gu-Vt-kKM">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="vPv-zO-iO0" kind="relationship" relationship="viewControllers" id="b25-ID-R4I"/>
+                        <segue destination="Gj6-EE-k73" kind="relationship" relationship="viewControllers" id="Vdb-g0-KlD"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ehg-B1-JIw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-283" y="212"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="person.fill.turn.right" catalog="system" width="128" height="107"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

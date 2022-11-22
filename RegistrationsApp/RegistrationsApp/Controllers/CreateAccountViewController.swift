@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateAccountViewController: UIViewController {
+final class CreateAccountViewController: UIViewController {
     
     // MARK: - IBOutlets
     
@@ -43,12 +43,14 @@ class CreateAccountViewController: UIViewController {
         strongPassIndicatorsViews.forEach { view in
             view.alpha = 0.1
         }
+        hideKeyboardWhenTappedAround()
+        startKeyboardObserver()
     }
     
 
     // MARK: - IBAction-s
     
-    @IBAction func emailTFAction(_ sender: UITextField) {
+    @IBAction private func emailTFAction(_ sender: UITextField) {
         if let email = sender.text,
            !email.isEmpty,
            VerificationService.isValidEmail(email: email) {
@@ -59,7 +61,7 @@ class CreateAccountViewController: UIViewController {
         errorEmailLbl.isHidden = isValidEmail
     }
     
-    @IBAction func passTFAction(_ sender: UITextField) {
+    @IBAction private func passTFAction(_ sender: UITextField) {
         if let passText = sender.text,
            !passText.isEmpty {
             passwordStrength = VerificationService.isValidPassword(pass: passText)
@@ -70,7 +72,7 @@ class CreateAccountViewController: UIViewController {
         sutupStrongPassIndicatorsViews()
     }
     
-    @IBAction func confPassTFAction(_ sender: UITextField) {
+    @IBAction private func confPassTFAction(_ sender: UITextField) {
         if let confPassText = sender.text,
            !confPassText.isEmpty,
            let passText = passwordTF.text,
@@ -83,19 +85,43 @@ class CreateAccountViewController: UIViewController {
         errorConfPassLbl.isHidden = isConfPass
     }
     
-    @IBAction func signInBtnAction() {
-//        navigationController?.popToRootViewController(animated: true)
+    @IBAction private func signInBtnAction() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
-    @IBAction func continueBtnAction() {
-//        if let email = emailTF.text,
-//           let pass = passwordTF.text {
-//            let userModel = UserModel(name: nameTF.text, email: email, pass: pass)
-//            performSegue(withIdentifier: "goToCodeVerifVC", sender: userModel)
-//        }
+    @IBAction private func continueBtnAction() {
+        if let email = emailTF.text,
+           let pass = passwordTF.text {
+            let userModel = UserModel(name: nameTF.text, email: email, pass: pass)
+            performSegue(withIdentifier: "goToSecretCodeVC", sender: userModel)
+        }
     }
     
     // MARK: - Private Func-s
+    
+    /// Keyboard Observer-s
+        
+    private func startKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc private func keyboardWillHide() {
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
     
     private func updateContinueBtnState() {
         continueBtn.isEnabled = isValidEmail && isConfPass && passwordStrength != .veryWeak
@@ -119,15 +145,12 @@ class CreateAccountViewController: UIViewController {
         }
     }
     
-    
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard let destVC = segue.destination as? VerificationsVC,
+              let userModel = sender as? UserModel
+        else { return }
+        destVC.userModel = userModel
     }
-    */
-
 }
